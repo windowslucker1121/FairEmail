@@ -35,11 +35,14 @@ jobs:
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
 
-    - name: Build Debug APK
-      run: ./gradlew assembleDebug
+    - name: List Gradle Tasks
+      run: ./gradlew tasks --all
 
-    - name: List output APK files
-      run: ls -la app/build/outputs/apk/debug/
+    - name: Details of assembleDebug Task
+      run: ./gradlew assembleDebug --info
+      
+    - name: List APK directory post-build
+      run: find . -type f -name '*.apk' -exec ls -l {} +
 
     - uses: actions/upload-artifact@v4
       with:
